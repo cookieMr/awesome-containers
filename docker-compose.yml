@@ -76,7 +76,7 @@ services:
     container_name: it-tools
     platform: linux/amd64
     ports:
-      - "8181:8181"
+      - "80:80"
     healthcheck:
       test:
         [

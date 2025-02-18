@@ -43,7 +43,7 @@ The [default administration credential](https://docs.sonarsource.com/sonarqube/9
 
 ## IT Tools
 
-It's available on [port 8181 on localhost](http://[::1]:8181).
+It's available on [port 80 on localhost](http://[::1]:80).
 
 ## Grafana Labs' LGTM
 
