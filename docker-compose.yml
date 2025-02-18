@@ -3,6 +3,7 @@ services:
   sonarqube:
     image: sonarqube:latest
     container_name: sonarqube
+    platform: linux/amd64
     ports:
       - "9000:9000"
     volumes:
@@ -39,6 +40,7 @@ services:
   sonar_postgres:
     image: postgres:alpine
     container_name: sonarqube-postgres
+    platform: linux/amd64
     volumes:
       - sonar_db_volume:/var/lib/postgresql
     environment:
@@ -72,6 +74,7 @@ services:
   itTools:
     image: ghcr.io/corentinth/it-tools:latest
     container_name: it-tools
+    platform: linux/amd64
     ports:
       - "8181:8181"
     healthcheck:
@@ -96,6 +99,7 @@ services:
   grafana_lgtm:
     image: grafana/otel-lgtm:latest
     container_name: grafana-lgtm
+    platform: linux/amd64
     ports:
       - "3000:3000"
       - "4317:4317"

@@ -18,8 +18,10 @@ docker-compose up --build --detach
 ### Clean Up
 
 ```bash
-docker-compose down --remove-orphans --volume
+docker-compose down --remove-orphans
 ```
+Use additional flag `--volume` to discard volumes (this will remove
+saved data used by containers).
 
 > Appending the `--volumes` will also remove volumes where data are persisted ourside the
 > docker conainer.
