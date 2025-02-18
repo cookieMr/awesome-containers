@@ -36,7 +36,7 @@ The [default administration credential](https://docs.sonarsource.com/sonarqube/9
 - username: `admin`
 - password: `admin`
 
-Change it! I put my in the [KeePassXC](https://github.com/keepassxreboot/keepassxc).
+> Change it! I put my in the [KeePassXC](https://github.com/keepassxreboot/keepassxc).
 
 ## IT Tools
 
@@ -48,5 +48,8 @@ It's available on [port 3000 on localhost](http://[::1]:3000).
 
 [Default `admin` credentials](https://signoz.io/guides/what-is-the-default-username-and-password-for-grafana-login-page/#grafanas-default-username-and-password)
 are:
+
 - username: `admin`
 - password: `admin`
+
+> Change it! I put my in the [KeePassXC](https://github.com/keepassxreboot/keepassxc).
