@@ -4,9 +4,10 @@ This is an opinionated list of Docker containers I find useful during daily work
 
 ---
 
-Secrets are stored in a `.env` file.
+Secrets are stored in a `.env` file. See the `.env_sample` file. It has all required
+secrets with a dummy values. Change them!
 
-I use [lazydocker](https://github.com/jesseduffield/lazydocker) to minotor containers.
+I use [lazydocker](https://github.com/jesseduffield/lazydocker) to monitor containers.
 
 ## Build & Run
 
