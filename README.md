@@ -23,7 +23,7 @@ docker-compose down --remove-orphans
 Use additional flag `--volume` to discard volumes (this will remove
 saved data used by containers).
 
-> Appending the `--volumes` will also remove volumes where data are persisted ourside the
+> Appending the `--volume` will also remove volumes where data are persisted ourside the
 > docker conainer.
 >
 > It's not used now since we want logs to persist between containers restarts.
