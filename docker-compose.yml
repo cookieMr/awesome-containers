@@ -12,6 +12,7 @@ services:
       SONAR_JDBC_URL: jdbc:postgresql://sonar_postgres:5432/${SONAR_DATABASE}
       SONAR_JDBC_USERNAME: ${SONAR_DB_USER}
       SONAR_JDBC_PASSWORD: ${SONAR_DB_PASSWORD}
+      SONAR_TELEMETRY_ENABLED: false
     healthcheck:
       test:
         [
@@ -20,14 +21,15 @@ services:
           "--quiet",
           "--tries=1",
           "--spider",
-          "http://localhost:9000/healthcheck",
+          "http://sonarqube:9000/healthcheck",
         ]
       interval: 10s
       timeout: 9s
       retries: 3
       start_period: 30s
     depends_on:
-      - sonar_postgres
+      sonar_postgres:
+        condition: service_healthy
     restart: unless-stopped
     networks:
       - sonarq-network
@@ -62,9 +64,13 @@ services:
       timeout: 9s
       retries: 3
       start_period: 10s
+    depends_on:
+      grafana_lgtm:
+        condition: service_healthy
     restart: unless-stopped
     networks:
       - sonarq-network
+      - otel-network
     deploy:
       resources:
         limits:
@@ -81,7 +87,7 @@ services:
       test:
         [
           "CMD-SHELL",
-          "curl --silent --fail http://localhost:80 > /dev/null || exit 1",
+          "curl --silent --fail http://it-tools:80 > /dev/null || exit 1",
         ]
       interval: 10s
       timeout: 9s
@@ -107,17 +113,17 @@ services:
     volumes:
       - grafana_storage:/var/lib/grafana
     environment:
-      - OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
-      - OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318
+      OTEL_EXPORTER_OTLP_PROTOCOL: http/protobuf
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://grafana-lgtm:4318
     healthcheck:
       test:
         [
           "CMD-SHELL",
-          "curl --silent --fail http://localhost:3000/api/health > /dev/null || exit 1",
+          "curl --silent --fail http://grafana-lgtm:3000/api/health > /dev/null || exit 1",
         ]
-      interval: 10s
-      timeout: 9s
-      retries: 3
+      interval: 15s
+      timeout: 14s
+      retries: 5
       start_period: 30s
     restart: unless-stopped
     networks:
@@ -128,6 +134,39 @@ services:
           cpus: "2"
           memory: 4G
 
+  wiremock:
+    image: wiremock/wiremock:latest-alpine
+    container_name: wiremock
+    platform: linux/amd64
+    ports:
+      - "8081:8080"
+    volumes:
+      - ${WIREMOCK_TEST_MAPPINGS_PATH}:/home/wiremock/mappings:ro
+    environment:
+      WIREMOCK_OPTIONS: "--disable-banner"
+    healthcheck:
+      test: 
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://wiremock:8080/__admin/mappings"
+        ]
+      interval: 10s
+      timeout: 9s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+    networks:
+      - wiremock-network
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: 512M
+
 volumes:
   grafana_storage: {}
   sonarqube_volume: {}
@@ -137,3 +176,4 @@ networks:
   it-tools-network: {}
   otel-network: {}
   sonarq-network: {}
+  wiremock-network: {}

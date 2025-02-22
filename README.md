@@ -41,11 +41,11 @@ The [default administration credential](https://docs.sonarsource.com/sonarqube/9
 
 > Change it! I put my in the [KeePassXC](https://github.com/keepassxreboot/keepassxc).
 
-## IT Tools
+### IT Tools
 
 It's available on [port 80 on localhost](http://[::1]:80).
 
-## Grafana Labs' LGTM
+### Grafana Labs' LGTM
 
 It's available on [port 3000 on localhost](http://[::1]:3000).
 
@@ -56,3 +56,9 @@ are:
 - password: `admin`
 
 > Change it! I put my in the [KeePassXC](https://github.com/keepassxreboot/keepassxc).
+
+### Wiremock
+
+It's available on port 8081 on localhost and under the
+[__admin/mappings](http://[::1]:8081/__admin/mappings)
+page you can examin loaded Wiremock mappings.
