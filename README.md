@@ -63,6 +63,7 @@ It's available on port 8081 on localhost and under the
 [__admin/mappings](http://[::1]:8081/__admin/mappings)
 page you can examin loaded Wiremock mappings.
 
-### PlanUML Server
+### PlanUML Server & Mermain Live Editor
 
-It's available on [port 8082 on localhost](http://[::1]:8082).
+ * PlantUML is available on [port 8082 on localhost](http://[::1]:8082)
+ * while Mermaid Live Editor is available on [port 8083 on localhost](http://[::1]:8083).
