@@ -62,3 +62,7 @@ are:
 It's available on port 8081 on localhost and under the
 [__admin/mappings](http://[::1]:8081/__admin/mappings)
 page you can examin loaded Wiremock mappings.
+
+### PlanUML Server
+
+It's available on [port 8082 on localhost](http://[::1]:8082).
