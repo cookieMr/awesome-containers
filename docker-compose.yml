@@ -7,12 +7,14 @@ services:
     ports:
       - "9000:9000"
     volumes:
-      - sonarqube_volume:/opt/sonarqube
+      - sonarqube_data_volume:/opt/sonarqube/data
+      - sonarqube_logs_volume:/opt/sonarqube/logs
+      - sonarqube_extensions_volume:/opt/sonarqube/extensions
     environment:
       SONAR_JDBC_URL: jdbc:postgresql://sonar_postgres:5432/${SONAR_DATABASE}
       SONAR_JDBC_USERNAME: ${SONAR_DB_USER}
       SONAR_JDBC_PASSWORD: ${SONAR_DB_PASSWORD}
-      SONAR_TELEMETRY_ENABLED: false
+      SONAR_TELEMETRY_ENABLE: false
     healthcheck:
       test:
         [
@@ -64,13 +66,9 @@ services:
       timeout: 9s
       retries: 3
       start_period: 10s
-    depends_on:
-      grafana_lgtm:
-        condition: service_healthy
     restart: unless-stopped
     networks:
       - sonarq-network
-      - otel-network
     deploy:
       resources:
         limits:
@@ -124,8 +122,6 @@ services:
       retries: 5
       start_period: 30s
     restart: unless-stopped
-    networks:
-      - otel-network
     deploy:
       resources:
         limits:
@@ -192,9 +188,10 @@ services:
 
 volumes:
   grafana_storage: {}
-  sonarqube_volume: {}
+  sonarqube_data_volume: {}
+  sonarqube_logs_volume: {}
+  sonarqube_extensions_volume: {}
   sonar_db_volume: {}
 
 networks:
-  otel-network: {}
   sonarq-network: {}
