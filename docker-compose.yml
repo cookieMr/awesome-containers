@@ -163,39 +163,12 @@ services:
           cpus: "0.25"
           memory: 512M
 
-  plant_uml:
-    image: plantuml/plantuml-server:latest
-    container_name: plant-uml
-    platform: linux/amd64
-    ports:
-      - "8082:8080"
-    healthcheck:
-      test: 
-        [
-          "CMD",
-          "wget",
-          "--quiet",
-          "--tries=1",
-          "--spider",
-          "http://plant-uml:8080"
-        ]
-      interval: 10s
-      timeout: 9s
-      retries: 3
-      start_period: 10s
-    restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          cpus: "0.25"
-          memory: 512M
-
   mermaid_uml:
     image: ghcr.io/mermaid-js/mermaid-live-editor:latest
     container_name: mermaid-uml
     platform: linux/amd64
     ports:
-      - "8083:8080"
+      - "8082:8080"
     healthcheck:
       test: 
         [
