@@ -34,7 +34,7 @@ saved data used by containers).
 
 It'll be available at [port 9000 on localhost](http://[::1]:9000).
 
-The [default administration credential](https://docs.sonarsource.com/sonarqube/9.8/instance-administration/security/#default-admin-credentials) are:
+The [default `admin` credential](https://docs.sonarsource.com/sonarqube/9.8/instance-administration/security/#default-admin-credentials) are:
 
 - username: `admin`
 - password: `admin`
