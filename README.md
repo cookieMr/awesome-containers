@@ -45,6 +45,10 @@ The [default `admin` credential](https://docs.sonarsource.com/sonarqube/9.8/inst
 
 It's available on [port 80 on localhost](http://[::1]:80).
 
+### Omni Tools
+
+It's available on [port 81 on localhost](http://[::1]:81).
+
 ### Grafana Labs' LGTM
 
 It's available on [port 3000 on localhost](http://[::1]:3000).
@@ -65,4 +69,10 @@ page you can examin loaded Wiremock mappings.
 
 ### Mermain Live Editor
 
- * while Mermaid Live Editor is available on [port 8082 on localhost](http://[::1]:8082).
+ * Mermaid Live Editor is available on [port 8082 on localhost](http://[::1]:8082).
+
+### Composerize
+
+ * [Composerize](http://[::1]:82)
+ * [Decomposerize](http://[::1]:82/decomposerize/)
+ * [Composeverter](http://[::1]:82/composeverter/)
