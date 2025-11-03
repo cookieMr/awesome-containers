@@ -216,7 +216,11 @@ services:
     ports:
       - "82:80"
     healthcheck:
-      test: ["CMD", "true"] # dummy healthcheck (no curl and no wget available)
+      test:
+        [
+          "CMD",
+          "true" # dummy healthcheck (no curl and no wget available)
+        ]
       interval: 10s
       timeout: 9s
       retries: 3
