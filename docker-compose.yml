@@ -215,6 +215,12 @@ services:
     platform: linux/amd64
     ports:
       - "82:80"
+    healthcheck:
+      test: ["CMD", "true"] # dummy healthcheck (no curl and no wget available)
+      interval: 10s
+      timeout: 9s
+      retries: 3
+      start_period: 10s
     restart: unless-stopped
     deploy:
       resources:

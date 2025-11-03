@@ -13,7 +13,7 @@ I use [lazydocker](https://github.com/jesseduffield/lazydocker) to monitor conta
 
 Pull fresh images:
 ```bash
-docker compose up --pull always --force-recreate
+docker-compose pull
 ```
 Actual build & run after pull:
 ```bash
