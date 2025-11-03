@@ -215,12 +215,76 @@ services:
     platform: linux/amd64
     ports:
       - "82:80"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "true" # dummy healthcheck (no curl and no wget available)
+        ]
+      interval: 10s
+      timeout: 9s
+      retries: 3
+      start_period: 10s
     restart: unless-stopped
     deploy:
       resources:
         limits:
           cpus: "0.25"
           memory: 512M
+
+  meme_studio:
+    image: ghcr.io/poeschl/meme-studio:latest
+    container_name: meme-studio
+    platform: linux/amd64
+    ports:
+      - "3001:3000"
+    healthcheck:
+      test: 
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://meme-studio:3000"
+        ]
+      interval: 10s
+      timeout: 9s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: 256M
+
+  swagger_editor:
+    image: swaggerapi/swagger-editor:latest
+    container_name: swagger-editor
+    platform: linux/amd64
+    ports:
+      - "8083:8080"
+    healthcheck:
+      test: 
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://swagger-editor:8080"
+        ]
+      interval: 10s
+      timeout: 9s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: 256M
 
 volumes:
   grafana_storage: {}
